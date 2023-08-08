@@ -29,8 +29,15 @@ onMounted(() => {
 
 async function add(){
   console.log(url.value)
-  const videoId = url.value.split("v=")[1]
-  // .substring(0, 11)
+  let videoId
+
+  if ( url.value.includes("youtu.be") ){
+    videoId = url.value.split("youtu.be/")[1]
+  }
+
+  if ( url.value.includes("youtube.com") ){
+    videoId = url.value.split("v=")[1]
+  }
   console.log(videoId)
   url.value = ''
   videosIds.value.push(videoId)
