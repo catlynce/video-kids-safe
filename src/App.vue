@@ -60,7 +60,8 @@ async function buildList(){
         <input type="text" id="url" v-model="url">
         <button>Guardar</button>
       </form>
-      <div id="player">
+      <div class="player-wrapper">
+        <div id="player"></div>
       </div>
       <div class="list">
         <div v-for="(video, idx) in videos" :key="idx">
@@ -75,20 +76,28 @@ async function buildList(){
   display: flex;
   justify-content: space-between;
   margin: 0 0 20px 0;
-  padding: 10px;
 }
 .url input {
   flex: 1;
   margin-right: 20px;
 }
+
+.player-wrapper {
+  height: 0;
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
 .list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 40px;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .list img {
+  width: 100%;
+  height: auto;
   border: 1px solid;
 }
 
