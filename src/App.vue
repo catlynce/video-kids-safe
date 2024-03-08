@@ -62,53 +62,23 @@ async function buildList(){
 </script>
 
 <template>
-  <div>
-      <form @submit.prevent="add" class="url">
-        <input type="text" id="url" v-model="url">
+  <div class="">
+      <form @submit.prevent="add" class="flex justify-between mb-4">
+        <input
+          type="text"
+          id="url"
+          v-model="url"
+          class="flex-1 mr-4 p-2 bg-gray-100 border border-gray-700"
+        >
         <button>Guardar</button>
       </form>
-      <div class="player-wrapper">
+      <div class="relative aspect-video">
         <div id="player"></div>
       </div>
-      <div class="list">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4">
         <div v-for="(video, idx) in videos" :key="idx">
-          <img :src="video.thumbnail" @click="update(video.id)">
+          <img :src="video.thumbnail" @click="update(video.id)" class="border border-gray-500 shadow cursor-pointer">
         </div>
       </div>
   </div>
 </template>
-
-<style scoped>
-.url {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 0 20px 0;
-}
-.url input {
-  flex: 1;
-  margin-right: 20px;
-}
-
-.player-wrapper {
-  height: 0;
-  position: relative;
-  padding-bottom: 56.25%;
-}
-
-.list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.list img {
-  width: 100%;
-  height: auto;
-  border: 1px solid;
-}
-
-.list img {
-  cursor: pointer;
-}
-</style>
