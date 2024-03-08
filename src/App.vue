@@ -62,7 +62,7 @@ async function buildList(){
   videos.value = []
   const ids = await localStorage.getItem('vids')
   if ( ids.trim().length !== 0 ){
-    let vids = ids.split(',')
+    let vids = ids.split(',').reverse()
     vids.forEach(video => {
       const thumbnail = `https://img.youtube.com/vi/${video}/mqdefault.jpg`
       videos.value.push({ id: video, thumbnail })
