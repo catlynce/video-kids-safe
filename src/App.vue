@@ -11,20 +11,20 @@ onMounted(() => {
   // create localStorage
   const Db = localStorage.getItem('vids')
   if ( ! Db ){
-    localStorage.setItem('vids', videosIds.value)
+    Promise.resolve(setLocalStorage())
   }
 
   buildList()
 
   const options = {
-    autoplay: 1,
+    autoplay: 0,
     controls: false,
     annotations: false,
     modestBranding: true,
     relatedVideos: false,
   }
   player.value = new YouTubePlayerPlus('#player', options)
-  player.value.load('wJZm7WPctK8', true)
+  // player.value.load('wJZm7WPctK8', true)
 })
 
 async function add(){
@@ -41,15 +41,19 @@ async function add(){
   console.log(videoId)
   url.value = ''
   videosIds.value.push(videoId)
-  await localStorage.setItem('vids', videosIds.value)
+
+  await setLocalStorage()
+
   buildList()
 }
 
+async function setLocalStorage(){
+  return localStorage.setItem('vids', JSON.stringify(videosIds.value))
+}
+
 async function remove(videoId){
-  let videos = await localStorage.getItem('vids')
-  videos = videos.split(',')
-  videos = videos.filter(item => item !== videoId)
-  await localStorage.setItem('vids', videos)
+  videosIds.value = videosIds.value.filter(item => item !== videoId)
+  await setLocalStorage()
   buildList()
 }
 
@@ -60,9 +64,9 @@ function update(videoId){
 
 async function buildList(){
   videos.value = []
-  const ids = await localStorage.getItem('vids')
-  if ( ids.trim().length !== 0 ){
-    let vids = ids.split(',').reverse()
+  const ids = await JSON.parse(localStorage.getItem('vids'))
+  if ( ids.length !== 0 ){
+    let vids = ids.reverse()
     vids.forEach(video => {
       const thumbnail = `https://img.youtube.com/vi/${video}/mqdefault.jpg`
       videos.value.push({ id: video, thumbnail })
