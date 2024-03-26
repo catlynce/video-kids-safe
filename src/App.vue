@@ -1,11 +1,12 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import YouTubePlayerPlus from 'youtube-player-plus'
 
 const url = ref()
 const player = ref()
 const videosIds = ref(['wJZm7WPctK8', 'pZ5NxMN88Jg'])
 const videos = ref([])
+const percent = ref(0)
 
 onMounted(() => {
   // create localStorage
@@ -60,6 +61,9 @@ async function remove(videoId){
 function update(videoId){
   console.log(videoId)
   player.value.load(videoId, true)
+  player.value.on('timeupdate', (e) => {
+    percent.value = parseInt(Math.ceil(player.value.percentageWatched*100))
+  })
 }
 
 async function buildList(){
@@ -88,6 +92,9 @@ async function buildList(){
       </form>
       <div class="relative aspect-video">
         <div id="player"></div>
+        <span class="absolute left-0 right-0 bottom-0 h-1 bg-slate-500 overflow-hidden">
+          <span :style="percent ? `width: ${percent}%;`:'width: 0;'" class="relative block h-2 bg-red-700"></span>
+        </span>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4">
         <div v-for="(video, idx) in videos" :key="idx" class="relative">
