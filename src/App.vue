@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import YouTubePlayerPlus from 'youtube-player-plus'
 
 const url = ref()
@@ -30,16 +30,10 @@ onMounted(() => {
 
 async function add(){
   console.log(url.value)
-  let videoId
+  let link = new URL(url.value)
+  let params = link.searchParams
+  let videoId = params.get('v') ?? null
 
-  if ( url.value.includes("youtu.be") ){
-    videoId = url.value.split("youtu.be/")[1]
-  }
-
-  if ( url.value.includes("youtube.com") ){
-    videoId = url.value.split("v=")[1]
-  }
-  console.log(videoId)
   url.value = ''
   videosIds.value.push(videoId)
 
