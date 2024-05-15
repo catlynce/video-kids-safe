@@ -4,9 +4,12 @@ import YouTubePlayerPlus from 'youtube-player-plus'
 
 const url = ref()
 const player = ref()
-const videosIds = ref(['wJZm7WPctK8', 'pZ5NxMN88Jg'])
+// const isPlaying = ref(false)
+//['wJZm7WPctK8', 'pZ5NxMN88Jg']
+const videosIds = ref([])
 const videos = ref([])
 const percent = ref(0)
+const seek = ref()
 
 onMounted(() => {
   // create localStorage
@@ -55,6 +58,7 @@ async function remove(videoId){
 function update(videoId){
   console.log(videoId)
   player.value.load(videoId, true)
+  // isPlaying.value = true
   player.value.on('timeupdate', (e) => {
     percent.value = parseInt(Math.ceil(player.value.percentageWatched*100))
   })
@@ -71,6 +75,20 @@ async function buildList(){
     })
   }
 }
+
+function videoSeek(){
+  player.value.seek(seek.value)
+  seek.value = ''
+}
+
+function backward(){
+  const time = player.value.getCurrentTime()
+  player.value.seek(time - 10)
+}
+function forward(){
+  const time = player.value.getCurrentTime()
+  player.value.seek(time + 10)
+}
 </script>
 
 <template>
@@ -84,11 +102,16 @@ async function buildList(){
         >
         <button>Guardar</button>
       </form>
-      <div class="relative aspect-video">
+      <div class="relative aspect-video" v-show="player?.getState() !== 'unstarted'">
         <div id="player"></div>
         <span class="absolute left-0 right-0 bottom-0 h-1 bg-slate-500 overflow-hidden">
           <span :style="percent ? `width: ${percent}%;`:'width: 0;'" class="relative block h-2 bg-red-700"></span>
         </span>
+      </div>
+      <div class="flex gap-4 justify-center py-4" v-show="player?.getState() !== 'unstarted'">
+        <button @click="backward" class="px-4 w-20"> &lt;&lt; </button>
+        <input type="number" v-model="seek" @keypress.enter="videoSeek" class="w-24 border border-slate-400 shadow-xs">
+        <button @click="forward" class="px-4 w-20"> &gt;&gt; </button>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4">
         <div v-for="(video, idx) in videos" :key="idx" class="relative">
