@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import YouTubePlayerPlus from 'youtube-player-plus'
 
 const url = ref()
@@ -8,6 +8,7 @@ const player = ref()
 //['wJZm7WPctK8', 'pZ5NxMN88Jg']
 const videosIds = ref([])
 const videos = ref([])
+const timer = ref()
 const percent = ref(0)
 const seek = ref()
 
@@ -61,6 +62,7 @@ function update(videoId){
   // isPlaying.value = true
   player.value.on('timeupdate', (e) => {
     percent.value = parseInt(Math.ceil(player.value.percentageWatched*100))
+    timer.value = parseInt(player.value.getCurrentTime())
   })
 }
 
@@ -89,6 +91,7 @@ function forward(){
   const time = player.value.getCurrentTime()
   player.value.seek(time + 10)
 }
+
 </script>
 
 <template>
@@ -108,10 +111,11 @@ function forward(){
           <span :style="percent ? `width: ${percent}%;`:'width: 0;'" class="relative block h-2 bg-red-700"></span>
         </span>
       </div>
-      <div class="flex gap-4 justify-center py-4" v-show="player?.getState() !== 'unstarted'">
+      <div class="relative flex gap-4 justify-center py-4" v-show="player?.getState() !== 'unstarted'">
         <button @click="backward" class="px-4 w-20"> &lt;&lt; </button>
         <input type="number" v-model="seek" @keypress.enter="videoSeek" class="w-24 border border-slate-400 shadow-xs">
         <button @click="forward" class="px-4 w-20"> &gt;&gt; </button>
+        <span class="absolute right-0 flex items-center justify-center w-20 h-10 text-xs text-white bg-slate-700 border border-slate-900 rounded shadow-xs">{{ timer }}</span>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4">
         <div v-for="(video, idx) in videos" :key="idx" class="relative">
