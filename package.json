@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.3.4",
-    "youtube-player-plus": "^0.1.5"
+    "youtube-player-plus": "^0.1.7"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

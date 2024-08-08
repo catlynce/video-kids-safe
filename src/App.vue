@@ -1,11 +1,10 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import YouTubePlayerPlus from 'youtube-player-plus'
 
 const url = ref()
 const player = ref()
 // const isPlaying = ref(false)
-//['wJZm7WPctK8', 'pZ5NxMN88Jg']
 const videosIds = ref([])
 const videos = ref([])
 const timer = ref()
@@ -29,7 +28,6 @@ onMounted(() => {
     relatedVideos: false,
   }
   player.value = new YouTubePlayerPlus('#player', options)
-  // player.value.load('wJZm7WPctK8', true)
 })
 
 async function add(){
@@ -115,7 +113,8 @@ function forward(){
         <button @click="backward" class="px-4 w-20"> &lt;&lt; </button>
         <input type="number" v-model="seek" @keypress.enter="videoSeek" class="w-24 border border-slate-400 shadow-xs">
         <button @click="forward" class="px-4 w-20"> &gt;&gt; </button>
-        <span class="absolute right-0 flex items-center justify-center w-20 h-10 text-xs text-white bg-slate-700 border border-slate-900 rounded shadow-xs">{{ timer }}</span>
+        <span class="absolute right-24 flex items-center justify-center w-20 h-10 text-xs text-white bg-slate-700 border border-slate-900 rounded shadow-xs">{{ timer }}</span>
+        <span class="absolute right-0 flex items-center justify-center w-20 h-10 text-xs text-white bg-slate-700 border border-slate-900 rounded shadow-xs">{{ Math.floor(player?.getDuration()) }}</span>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4">
         <div v-for="(video, idx) in videos" :key="idx" class="relative">

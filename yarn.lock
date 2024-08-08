@@ -908,6 +908,7 @@ source-map-js@^1.0.2:
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
 
 "string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0:
+  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -926,6 +927,7 @@ string-width@^5.0.1, string-width@^5.1.2:
     strip-ansi "^7.0.1"
 
 "strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+  name strip-ansi-cjs
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -1076,9 +1078,9 @@ yaml@^2.3.4:
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.4.1.tgz#2e57e0b5e995292c25c75d2658f0664765210eed"
   integrity sha512-pIXzoImaqmfOrL7teGUBt/T7ZDnyeGBWyXQBvOVhLkWLN37GXv8NMLK406UY6dS51JfcQHsmcW5cJ441bHg6Lg==
 
-youtube-player-plus@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/youtube-player-plus/-/youtube-player-plus-0.1.5.tgz#06e2c01d22b8bb49f84d999a5ca4b496c3c606c3"
-  integrity sha512-r5oSEZKWJ4BqFsJeAdXEyz+uYpHNe8NH1odXfrMjZs6bTq001k6hQjLPPHY7O6YIehZWGV3Afq9KR64oM/GjYQ==
+youtube-player-plus@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/youtube-player-plus/-/youtube-player-plus-0.1.7.tgz#28fd0ba405d7a275daedaff1b4b51ae7fe459b13"
+  integrity sha512-RDvWrFcdoE+UqIyV9UsAO/Z/xJXwRHvsM+ywOoIazEssXgwPXpkT2X87Hx+BX7v8zqqgqeIdApc1hueDZ1aiiA==
   dependencies:
     eventemitter3 "^5.0.1"
