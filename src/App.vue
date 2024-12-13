@@ -93,7 +93,7 @@ function forward(){
 </script>
 
 <template>
-  <div class="">
+  <main>
       <form @submit.prevent="add" class="flex justify-between mb-4">
         <input
           type="text"
@@ -122,5 +122,5 @@ function forward(){
           <img :src="video.thumbnail" @click="update(video.id)" class="border border-gray-500 shadow cursor-pointer">
         </div>
       </div>
-  </div>
+  </main>
 </template>
