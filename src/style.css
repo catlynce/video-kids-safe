@@ -12,7 +12,7 @@ a:hover {
 }
 
 button {
-  @apply rounded border border-transparent py-2 px-4 text-white font-medium bg-gray-700 cursor-pointer transition-all
+  @apply rounded border border-transparent py-1 px-1 text-white font-medium bg-gray-700 cursor-pointer transition-all
   /*
   border-radius: 2px;
   border: 1px solid transparent;
