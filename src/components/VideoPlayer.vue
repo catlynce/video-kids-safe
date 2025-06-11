@@ -73,6 +73,11 @@ watch(() => props.videoId, (newId) => {
     loadVideo(newId)
   }
 })
+function setPlaybackSpeed(rate) {
+  if (player.value) {
+    player.value.setPlaybackRate(rate)
+  }
+}
 </script>
 
 <template>
@@ -87,6 +92,11 @@ watch(() => props.videoId, (newId) => {
       <button @click="backward" class="px-4 w-20">&lt;&lt;</button>
       <input type="number" v-model="seek" @keypress.enter="videoSeek" class="w-24 border border-slate-400 shadow-xs">
       <button @click="forward" class="px-4 w-20">&gt;&gt;</button>
+      <!-- Playback speed buttons -->
+      <button @click="setPlaybackSpeed(1)" class="px-2 w-14">1x</button>
+      <button @click="setPlaybackSpeed(1.5)" class="px-2 w-14">1.5x</button>
+      <button @click="setPlaybackSpeed(1.75)" class="px-2 w-14">1.75x</button>
+      <button @click="setPlaybackSpeed(2)" class="px-2 w-14">2x</button>
       <span class="absolute right-24 flex items-center justify-center w-20 h-10 text-xs text-white bg-slate-700 border border-slate-900 rounded shadow-xs">
         {{ timer }}
       </span>
